@@ -28,7 +28,9 @@ const Children = (props: {
     renderLeaf,
     selection,
   } = props
+  //editor 是reactEditor 对象，这个对象虚拟 node（slate）转化为native DOM的操作
   const editor = useEditor()
+  //
   const path = ReactEditor.findPath(editor, node)
   const children = []
   const isLeafBlock =
@@ -40,6 +42,7 @@ const Children = (props: {
     const p = path.concat(i)
     const n = node.children[i] as Descendant
     const key = ReactEditor.findKey(editor, n)
+    // 把slate 的path 转换为 DOM range对象
     const range = Editor.range(editor, p)
     const sel = selection && Range.intersection(range, selection)
     const ds = decorate([n, p])
